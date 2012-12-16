@@ -34,7 +34,7 @@ foreach($modes as $mode)
 }
 ?>
 </select>
-<input type="submit" />
+<input type="submit" value="Change"/>
 </form>
 
 <br />
@@ -52,7 +52,7 @@ foreach($modes as $mode)
 }
 ?>
 </select>
-<input type="submit" />
+<input type="submit" value="Remove"/>
 </form>
 
 <br />
@@ -66,3 +66,22 @@ foreach($modes as $mode)
 <br />
 
 
+<h3>Import Songs</h3>
+<form action="import.php" method="post" enctype="multipart/form-data">
+<input type="hidden" name="action" value="import"/>
+<select name="type">
+<?php
+foreach($modes as $mode)
+{
+    echo '<option value="'.$mode['id'].'">'.$mode['name'].'</option>';
+}
+?>
+</select>
+<input type="file" name="file">
+<input type="submit" value="Import"/>
+</form>
+
+<br />
+
+
+<p>Total songs: <?php echo $db->getTotalSongs(); ?></p>

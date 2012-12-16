@@ -63,6 +63,12 @@ function getMode()
     return $arr[0];
 }
 
+function getTotalSongs()
+{
+    $sql = 'select count(*) from songs';
+    $arr = $this->arrayQuery($sql);
+    return $arr[0][0];
+}
 
 function getQueue()
 {
@@ -77,11 +83,19 @@ function deleteFromQueue($id)
     return mysql_query($sql);
 }
 
+function addToQueue($id, $name)
+{
+    $id = mysql_escape_string($id);
+    $name = mysql_escape_string($name);
+    $sql = "insert into queue (song_id, name) values ($id, '$name')";
+    return mysql_query($sql);
+}
 
 function search($name)
 {
+    $mode = $this->getMode();
     $name = mysql_escape_string($name);
-    $sql = "select * from songs where ( title COLLATE UTF8_GENERAL_CI LIKE '%$name%' ) or ( artist COLLATE UTF8_GENERAL_CI LIKE '%$name%' )";
+    $sql = "select * from songs where type = ".$mode['id']." and (( title COLLATE UTF8_GENERAL_CI LIKE '%$name%' ) or ( artist COLLATE UTF8_GENERAL_CI LIKE '%$name%' ))";
     return $this->arrayQuery($sql);
 }
 
@@ -93,7 +107,7 @@ function addSong($type,$artist,$title,$code,$track)
     $code = mysql_escape_string($code);
     $track = mysql_escape_string($track);
 
-    $sql = "INSERT into songs (type,artist,title,code,track) values ($type,$artist,$title,$code,$track)";
+    $sql = "INSERT into songs (type,artist,title,code,track) values ($type,'$artist','$title','$code',$track)";
 
     return mysql_query($sql);
 }
