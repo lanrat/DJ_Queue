@@ -70,6 +70,13 @@ function getTotalSongs()
     return $arr[0][0];
 }
 
+function getQueueSize()
+{
+    $sql = 'select count(*) from queue';
+    $arr = $this->arrayQuery($sql);
+    return $arr[0][0];
+}
+
 function getQueue()
 {
     $sql = "select queue.id, queue.user, songs.artist, songs.title, songs.code, songs.track from queue, songs where queue.song_id = songs.id order by queue.id asc";
@@ -87,7 +94,16 @@ function addToQueue($id, $name)
 {
     $id = mysql_escape_string($id);
     $name = mysql_escape_string($name);
-    $sql = "insert into queue (song_id, name) values ($id, '$name')";
+    $this->increaseCount($id);
+    $sql = "insert into queue (song_id, user) values ($id, '$name')";
+    echo $sql;
+    return mysql_query($sql);
+}
+
+function increaseCount($id)
+{
+    $id = mysql_escape_string($id);
+    $sql = "update songs set count = count+1 where id = $id";
     return mysql_query($sql);
 }
 
@@ -95,7 +111,7 @@ function search($name)
 {
     $mode = $this->getMode();
     $name = mysql_escape_string($name);
-    $sql = "select * from songs where type = ".$mode['id']." and (( title COLLATE UTF8_GENERAL_CI LIKE '%$name%' ) or ( artist COLLATE UTF8_GENERAL_CI LIKE '%$name%' ))";
+    $sql = "select * from songs where type = ".$mode['id']." and (( title COLLATE UTF8_GENERAL_CI LIKE '%$name%' ) or ( artist COLLATE UTF8_GENERAL_CI LIKE '%$name%' )) limit 0, 100";
     return $this->arrayQuery($sql);
 }
 

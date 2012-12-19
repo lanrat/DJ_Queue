@@ -20,10 +20,11 @@ var http = createObject();
 function searchNameq() {
 searchq = encodeURI(document.getElementById('searchq').value);
 document.getElementById('msg').style.display = "block";
-document.getElementById('msg').innerHTML = "Searching for <strong>" + searchq+"";
+document.getElementById('msg').innerHTML = "";
+/*document.getElementById('msg').innerHTML = "Searching for <strong>" + searchq+"";*/
 // Set te random number to add to URL request
 nocache = Math.random();
-http.open('get', 'in-search.php?name='+searchq+'&nocache = '+nocache);
+http.open('get', 'ajax.php?action=search&name='+searchq+'&nocache = '+nocache);
 http.onreadystatechange = searchNameqReply;
 http.send(null);
 }
