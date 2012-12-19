@@ -25,12 +25,37 @@ document.getElementById('msg').innerHTML = "";
 // Set te random number to add to URL request
 nocache = Math.random();
 http.open('get', 'ajax.php?action=search&name='+searchq+'&nocache = '+nocache);
-http.onreadystatechange = searchNameqReply;
+http.onreadystatechange = updateReplyContent;
 http.send(null);
 }
-function searchNameqReply() {
+function updateReplyContent() {
 if(http.readyState == 4){
 var response = http.responseText;
-document.getElementById('search-result').innerHTML = response;
+document.getElementById('update-result').innerHTML = response;
 }
+}
+function updateSizeContent() {
+if(http.readyState == 4){
+var response = http.responseText;
+document.getElementById('update-size').innerHTML = response;
+}
+}
+
+function updateSize() {
+nocache = Math.random();
+http.open('get', 'ajax.php?action=size&nocache = '+nocache);
+http.onreadystatechange = updateSizeContent;
+http.send(null);
+}
+
+
+/* -------------------------- */
+/* QUEUE */
+/* -------------------------- */
+
+function updateQueue() {
+nocache = Math.random();
+http.open('get', 'ajax.php?action=queue&nocache = '+nocache);
+http.onreadystatechange = updateReplyContent;
+http.send(null);
 }
