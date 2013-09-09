@@ -1,0 +1,9 @@
+<?php
+//ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+
+$user = 'USERNAME';
+$pass = 'PASSWORD';
+$host = 'localhost';
+$database = 'DATABASE';
+?>
