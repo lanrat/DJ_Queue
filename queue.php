@@ -38,7 +38,7 @@
 
     <nav class="menu_bottom">
     <ul>
-        <li><a target="_blank" href="https://github.com/mrlanrat/DJ_Queue">Souce</a></li>
+        <li><a target="_blank" href="https://github.com/lanrat/DJ_Queue">Souce</a></li>
         <li><a target="_blank" href="http://vorsk.com">Vorsk</a></li>
     </ul>
     </nav>
