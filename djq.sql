@@ -69,3 +69,12 @@ CREATE TABLE IF NOT EXISTS `songs` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+--
+-- Insert default modes
+--
+
+INSERT INTO `modes` (`id`, `name`, `active`) VALUES (NULL, 'karaoke', '1');
+INSERT INTO `modes` (`id`, `name`, `active`) VALUES (NULL, 'songs', '0');
+
